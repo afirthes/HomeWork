@@ -7,95 +7,84 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    let image = UIImage(named: "photo")!
-    var imageToShare: UIImageView!
-    var shareImageButton: UIButton!
-    var textField: UITextField!
-    var shareTextButton: UIButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
-        
-        configureImageView()
-        configureShareImageButton()
-        configureTextField()
-        configureButton()
-    }
+    var imageToShareImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Constants.meetingPhoto
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
-    func configureImageView() {
-        imageToShare = UIImageView()
-        imageToShare.image = image
-        imageToShare.contentMode = .scaleAspectFit
-        
-        view.addSubview(imageToShare)
-        
-        imageToShare.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageToShare.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            imageToShare.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageToShare.widthAnchor.constraint(equalToConstant: 300),
-            imageToShare.heightAnchor.constraint(equalToConstant: 300)
-        ])
-    }
+    var shareImageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Share image", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
     
-    func configureShareImageButton() {
-        shareImageButton = UIButton()
-        shareImageButton.setTitle("Share image", for: .normal)
-        shareImageButton.setTitleColor(.systemBlue, for: .normal)
-        
-        view.addSubview(shareImageButton)
-        
-        shareImageButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            shareImageButton.topAnchor.constraint(equalTo: imageToShare.bottomAnchor, constant: 12),
-            shareImageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        shareImageButton.addTarget(self, action: #selector(shareImageAction), for: .touchUpInside)
-    }
-    
-    func configureTextField() {
-        textField = UITextField()
+    var stringToShareTextField: UITextField = {
+        let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Text to share"
         textField.font = UIFont(name: "Avenir", size: 22)
         textField.clearButtonMode = .whileEditing
+        return textField
+    }()
+    
+    var shareTextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Share text", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        view.addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: shareImageButton.bottomAnchor, constant: 24),
-            textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textField.widthAnchor.constraint(equalToConstant: 300)
-        ])
+        setupUI()
     }
     
-    func configureButton() {
-        shareTextButton = UIButton()
-        shareTextButton.setTitle("Share text", for: .normal)
-        shareTextButton.setTitleColor(.systemBlue, for: .normal)
+    func setupUI() {
+        self.view.backgroundColor = .systemBackground
         
-        view.addSubview(shareTextButton)
+        [imageToShareImageView, shareImageButton, stringToShareTextField, shareTextButton].forEach({
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        })
         
-        shareTextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            shareTextButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 12),
+            imageToShareImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            imageToShareImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageToShareImageView.widthAnchor.constraint(equalToConstant: 300),
+            imageToShareImageView.heightAnchor.constraint(equalToConstant: 300),
+            
+            shareImageButton.topAnchor.constraint(equalTo: imageToShareImageView.bottomAnchor, constant: 12),
+            shareImageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            stringToShareTextField.topAnchor.constraint(equalTo: shareImageButton.bottomAnchor, constant: 24),
+            stringToShareTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stringToShareTextField.widthAnchor.constraint(equalToConstant: 300),
+            
+            shareTextButton.topAnchor.constraint(equalTo: stringToShareTextField.bottomAnchor, constant: 12),
             shareTextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        shareImageButton.addTarget(self, action: #selector(shareImageAction), for: .touchUpInside)
         shareTextButton.addTarget(self, action: #selector(shareTextAction), for: .touchUpInside)
     }
 
     @objc func shareImageAction() {
+        guard let image = Constants.meetingPhoto else {
+            showAlert(with: "Somwthing went wrong!", and: "Cant find image.")
+            return
+        }
         let ac = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(ac, animated: true)
     }
     
     @objc func shareTextAction() {
-        guard let text = textField.text, !text.isEmpty else {
+        guard let text = stringToShareTextField.text, !text.isEmpty else {
             showAlert(with: "Text field is empty.", and: "Please enter some text to share.")
             return
         }
@@ -110,17 +99,16 @@ class ViewController: UIViewController {
         present(alertVC, animated: true)
     }
     
-
 }
 
 //Mark: - UIActivityItemSource
 extension ViewController: UIActivityItemSource {
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return textField.text ?? "<empty>"
+        return stringToShareTextField.text ?? "<empty>"
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return textField.text ?? "<empty>"
+        return stringToShareTextField.text ?? "<empty>"
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
