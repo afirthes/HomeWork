@@ -7,18 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080C98A6297A6AF7000B2D1A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C98A5297A6AF7000B2D1A /* RoundedButton.swift */; };
+		080C98A8297A6C81000B2D1A /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C98A7297A6C81000B2D1A /* AlarmViewController.swift */; };
+		080C98AA297A6C8C000B2D1A /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C98A9297A6C8C000B2D1A /* TimerViewController.swift */; };
 		084B1F5A297152380068CC60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F59297152380068CC60 /* AppDelegate.swift */; };
 		084B1F5C297152380068CC60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F5B297152380068CC60 /* SceneDelegate.swift */; };
-		084B1F5E297152380068CC60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F5D297152380068CC60 /* ViewController.swift */; };
+		084B1F5E297152380068CC60 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F5D297152380068CC60 /* TabBarViewController.swift */; };
 		084B1F632971523A0068CC60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 084B1F622971523A0068CC60 /* Assets.xcassets */; };
 		084B1F662971523A0068CC60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084B1F642971523A0068CC60 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		080C98A5297A6AF7000B2D1A /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		080C98A7297A6C81000B2D1A /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		080C98A9297A6C8C000B2D1A /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		084B1F56297152380068CC60 /* HomeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		084B1F59297152380068CC60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		084B1F5B297152380068CC60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		084B1F5D297152380068CC60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		084B1F5D297152380068CC60 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		084B1F622971523A0068CC60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		084B1F652971523A0068CC60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		084B1F672971523A0068CC60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,10 +62,13 @@
 			children = (
 				084B1F59297152380068CC60 /* AppDelegate.swift */,
 				084B1F5B297152380068CC60 /* SceneDelegate.swift */,
-				084B1F5D297152380068CC60 /* ViewController.swift */,
+				084B1F5D297152380068CC60 /* TabBarViewController.swift */,
+				080C98A5297A6AF7000B2D1A /* RoundedButton.swift */,
 				084B1F622971523A0068CC60 /* Assets.xcassets */,
 				084B1F642971523A0068CC60 /* LaunchScreen.storyboard */,
 				084B1F672971523A0068CC60 /* Info.plist */,
+				080C98A7297A6C81000B2D1A /* AlarmViewController.swift */,
+				080C98A9297A6C8C000B2D1A /* TimerViewController.swift */,
 			);
 			path = HomeWork;
 			sourceTree = "<group>";
@@ -134,8 +143,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				084B1F5E297152380068CC60 /* ViewController.swift in Sources */,
+				080C98A8297A6C81000B2D1A /* AlarmViewController.swift in Sources */,
+				084B1F5E297152380068CC60 /* TabBarViewController.swift in Sources */,
 				084B1F5A297152380068CC60 /* AppDelegate.swift in Sources */,
+				080C98A6297A6AF7000B2D1A /* RoundedButton.swift in Sources */,
+				080C98AA297A6C8C000B2D1A /* TimerViewController.swift in Sources */,
 				084B1F5C297152380068CC60 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
