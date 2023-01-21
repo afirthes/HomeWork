@@ -11,38 +11,12 @@ class TimerViewController: UIViewController {
     
     private let timePicker = UIPickerView()
     
-    private let chevronRightImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "chevron.right")
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
-    
-    private let atFinishedLabel = {
-        let label = UILabel()
-        label.text = "По окончании"
-        return label
-    }()
-    
-    private let melodyLabel = {
-        let label = UILabel()
-        label.text = "Радар"
-        return label
-    }()
-    
-    private let endingStack = {
+    private let stack: UIStackView = {
         let stack = UIStackView()
-        stack.layer.cornerRadius = 10
-        stack.backgroundColor = .systemGray4
-        stack.spacing = UIStackView.spacingUseSystem
-        stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 50)
+        stack.axis = .vertical
+        stack.spacing = 10
         return stack
     }()
-    
-    private let chevronStack = {
-        let stack = UIStackView()
-        
-    }
     
     private let cancelButton = {
         let button = RoundedButton()
@@ -80,15 +54,20 @@ class TimerViewController: UIViewController {
             timePicker,
             startButton,
             cancelButton,
-            endingStack
+            stack
         ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview($0)
         }
         
-        endingStack.addArrangedSubview(atFinishedLabel)
-        endingStack.addArrangedSubview(melodyLabel)
-        endingStack.addArrangedSubview(chevronRightImageView)
+        // Example data
+        let a1 = AlarmLineView()
+        let a2 = AlarmLineView()
+        let a3 = AlarmLineView()
+        
+        stack.addArrangedSubview(a1)
+        stack.addArrangedSubview(a2)
+        stack.addArrangedSubview(a3)
         
         NSLayoutConstraint.activate([
             timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
@@ -105,12 +84,14 @@ class TimerViewController: UIViewController {
             startButton.widthAnchor.constraint(equalToConstant: 100),
             startButton.heightAnchor.constraint(equalToConstant: 100),
             
-            endingStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            endingStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            endingStack.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 20),
-            endingStack.heightAnchor.constraint(equalToConstant: 50),
+            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            stack.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 20),
+
             
-            atFinishedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+            a1.heightAnchor.constraint(equalToConstant: 50),
+            a2.heightAnchor.constraint(equalToConstant: 50),
+            a3.heightAnchor.constraint(equalToConstant: 50)
             
         ])
     }

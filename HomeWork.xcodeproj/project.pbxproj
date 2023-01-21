@@ -15,6 +15,7 @@
 		084B1F5E297152380068CC60 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F5D297152380068CC60 /* TabBarViewController.swift */; };
 		084B1F632971523A0068CC60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 084B1F622971523A0068CC60 /* Assets.xcassets */; };
 		084B1F662971523A0068CC60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084B1F642971523A0068CC60 /* LaunchScreen.storyboard */; };
+		0853B6F7297BE77000DFB10F /* AlarmLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853B6F6297BE77000DFB10F /* AlarmLineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		084B1F622971523A0068CC60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		084B1F652971523A0068CC60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		084B1F672971523A0068CC60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0853B6F6297BE77000DFB10F /* AlarmLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmLineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				084B1F672971523A0068CC60 /* Info.plist */,
 				080C98A7297A6C81000B2D1A /* AlarmViewController.swift */,
 				080C98A9297A6C8C000B2D1A /* TimerViewController.swift */,
+				0853B6F6297BE77000DFB10F /* AlarmLineView.swift */,
 			);
 			path = HomeWork;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			files = (
 				080C98A8297A6C81000B2D1A /* AlarmViewController.swift in Sources */,
 				084B1F5E297152380068CC60 /* TabBarViewController.swift in Sources */,
+				0853B6F7297BE77000DFB10F /* AlarmLineView.swift in Sources */,
 				084B1F5A297152380068CC60 /* AppDelegate.swift in Sources */,
 				080C98A6297A6AF7000B2D1A /* RoundedButton.swift in Sources */,
 				080C98AA297A6C8C000B2D1A /* TimerViewController.swift in Sources */,
