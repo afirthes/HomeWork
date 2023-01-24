@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		08398BBC297FF8360028F05D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08398BBB297FF8360028F05D /* RegisterViewController.swift */; };
 		08398BBE297FF86C0028F05D /* KeyboardAwareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08398BBD297FF86C0028F05D /* KeyboardAwareViewController.swift */; };
+		08398BC1298015800028F05D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08398BC0298015800028F05D /* AuthService.swift */; };
+		08398BC4298016040028F05D /* RegistrationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08398BC3298016040028F05D /* RegistrationInfo.swift */; };
+		08398BC629801EC80028F05D /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08398BC529801EC80028F05D /* ContentViewController.swift */; };
 		084B1F5A297152380068CC60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F59297152380068CC60 /* AppDelegate.swift */; };
 		084B1F5C297152380068CC60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F5B297152380068CC60 /* SceneDelegate.swift */; };
 		084B1F5E297152380068CC60 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B1F5D297152380068CC60 /* LoginViewController.swift */; };
@@ -19,6 +22,9 @@
 /* Begin PBXFileReference section */
 		08398BBB297FF8360028F05D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		08398BBD297FF86C0028F05D /* KeyboardAwareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareViewController.swift; sourceTree = "<group>"; };
+		08398BC0298015800028F05D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		08398BC3298016040028F05D /* RegistrationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInfo.swift; sourceTree = "<group>"; };
+		08398BC529801EC80028F05D /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		084B1F56297152380068CC60 /* HomeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		084B1F59297152380068CC60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		084B1F5B297152380068CC60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,8 +63,25 @@
 				084B1F5D297152380068CC60 /* LoginViewController.swift */,
 				08398BBB297FF8360028F05D /* RegisterViewController.swift */,
 				08398BBD297FF86C0028F05D /* KeyboardAwareViewController.swift */,
+				08398BC529801EC80028F05D /* ContentViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		08398BBF298015670028F05D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				08398BC0298015800028F05D /* AuthService.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		08398BC2298015F60028F05D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08398BC3298016040028F05D /* RegistrationInfo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		084B1F4D297152380068CC60 = {
@@ -80,6 +103,8 @@
 		084B1F58297152380068CC60 /* HomeWork */ = {
 			isa = PBXGroup;
 			children = (
+				08398BC2298015F60028F05D /* Model */,
+				08398BBF298015670028F05D /* Managers */,
 				08398BBA297FF76F0028F05D /* ViewControllers */,
 				08398BB9297FF74A0028F05D /* Support */,
 			);
@@ -156,9 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08398BC629801EC80028F05D /* ContentViewController.swift in Sources */,
 				084B1F5E297152380068CC60 /* LoginViewController.swift in Sources */,
 				084B1F5A297152380068CC60 /* AppDelegate.swift in Sources */,
+				08398BC4298016040028F05D /* RegistrationInfo.swift in Sources */,
 				084B1F5C297152380068CC60 /* SceneDelegate.swift in Sources */,
+				08398BC1298015800028F05D /* AuthService.swift in Sources */,
 				08398BBE297FF86C0028F05D /* KeyboardAwareViewController.swift in Sources */,
 				08398BBC297FF8360028F05D /* RegisterViewController.swift in Sources */,
 			);

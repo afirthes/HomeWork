@@ -95,11 +95,36 @@ class LoginViewController: KeyboardAwareViewController {
     @objc
     func loginTapped() {
         
+        guard let login = loginTextField.text, let password = passwordTextField.text else {
+            showAlert(with: "Error!", and: "Login and password should not be empty.")
+            return
+        }
+        
+        loginTextField.text = nil
+        passwordTextField.text = nil
+        
+        if AuthService.shared.auth(with: login, and: password) {
+            let vc = ContentViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+            AuthService.shared.rememberUser(with: login)
+        } else {
+            showAlert(with: "Error!", and: "Wrong login or password")
+        }
+    }
+    
+    func showAlert(with title: String, and text: String) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
     @objc
     func registerTapped() {
-        present(RegisterViewController(), animated: true)
+        let vc = RegisterViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     // MARK: TextFieldSupplierProtocol

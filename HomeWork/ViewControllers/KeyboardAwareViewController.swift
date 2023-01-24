@@ -21,9 +21,21 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
         view.backgroundColor = .systemBackground
         
         setupKeyboardRemovingWhenTappedOutside()
-        registerForKeyboardNotifications()
+        
         
         getTextFields().forEach({ $0.delegate = self })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        registerForKeyboardNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+        unregisterForKeyboardNotifications()
     }
     
     private func setupKeyboardRemovingWhenTappedOutside() {
@@ -37,6 +49,10 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: UIWindow.keyboardWillHideNotification, object: nil)
     }
     
+    func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: Handler objc functions
     
     @objc func dismissKeyboard() {
@@ -44,6 +60,9 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
     }
     
     @objc func keyboardWasShown(notification: NSNotification) {
+        
+        print(notification.name)
+        
         if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
            let activeField = activeField
         {
@@ -52,8 +71,11 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
             let keyboardHeight = keyboardRect.height
             let inputMaxY = activeField.frame.maxY
             
-            if activeField.frame.intersects(keyboardRect) {
-                self.view.frame.origin.y = 0 - (inputMaxY - (viewHeight - keyboardHeight)) - 8
+            print(keyboardRect)
+            print(activeField.frame)
+            
+            if keyboardRect.maxY >= activeField.frame.maxY {
+                self.view.frame.origin.y = 0 - (inputMaxY - (viewHeight - keyboardHeight))
             }
         }
     }

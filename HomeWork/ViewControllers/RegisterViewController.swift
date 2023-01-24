@@ -20,6 +20,7 @@ class RegisterViewController: KeyboardAwareViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray4
         textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -27,17 +28,18 @@ class RegisterViewController: KeyboardAwareViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray4
         textField.placeholder = "E-Mail"
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
-    let nameField: UITextField = {
+    let nameTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray4
         textField.placeholder = "Name"
         return textField
     }()
     
-    let phoneField: UITextField = {
+    let phoneTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray4
         textField.placeholder = "Phone"
@@ -53,6 +55,7 @@ class RegisterViewController: KeyboardAwareViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        registerButtonHandlers()
     }
     
     private func setupUI() {
@@ -61,8 +64,8 @@ class RegisterViewController: KeyboardAwareViewController {
             loginTextField,
             passwordTextField,
             emailTextField,
-            nameField,
-            phoneField,
+            nameTextField,
+            phoneTextField,
             registerButton,
         ].forEach({
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -76,17 +79,17 @@ class RegisterViewController: KeyboardAwareViewController {
             registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             registerButton.heightAnchor.constraint(equalToConstant: 31),
             
-            phoneField.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -20),
-            phoneField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            phoneField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            phoneField.heightAnchor.constraint(equalToConstant: 31),
+            phoneTextField.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -20),
+            phoneTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            phoneTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            phoneTextField.heightAnchor.constraint(equalToConstant: 31),
             
-            nameField.bottomAnchor.constraint(equalTo: phoneField.topAnchor, constant: -20),
-            nameField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            nameField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            nameField.heightAnchor.constraint(equalToConstant: 31),
+            nameTextField.bottomAnchor.constraint(equalTo: phoneTextField.topAnchor, constant: -20),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            nameTextField.heightAnchor.constraint(equalToConstant: 31),
             
-            emailTextField.bottomAnchor.constraint(equalTo: nameField.topAnchor, constant: -20),
+            emailTextField.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -20),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             emailTextField.heightAnchor.constraint(equalToConstant: 31),
@@ -104,5 +107,70 @@ class RegisterViewController: KeyboardAwareViewController {
         ])
     }
 
+    func registerButtonHandlers() {
+        registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
+    }
+    
+    @objc func registerTapped() {
+        
+        guard let name = nameTextField.text, !name.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let email = emailTextField.text, !email.isEmpty,
+              let login = loginTextField.text, !login.isEmpty,
+              let phone = phoneTextField.text, !phone.isEmpty else {
+            
+            showAlert(with: "Error!", and: "Please fill all fields.")
+            return
+        }
+        
+        let registration = RegistrationInfo(
+            name: name,
+            password: password,
+            email: email,
+            login: login,
+            phone: phone
+        )
+        
+        if AuthService.shared.register(with: registration) {
+            showAlert(with: "Registered", and: "Registered \(registration.login) user") { action in
+                self.dismiss(animated: true)
+            }
+        } else {
+            showAlert(with: "Error", and: "User \(registration.login) already exists.")
+        }
 
+    }
+    
+    func showAlert(with title: String, and text: String, completion: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: completion)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+
+    // MARK: TextFieldSupplierProtocol
+    
+    override func getTextFields() -> [UITextField] {
+        [
+            loginTextField,
+            passwordTextField,
+            emailTextField,
+            nameTextField,
+            phoneTextField
+        ]
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let fields = getTextFields()
+        
+        if fields.last === textField {
+            textField.resignFirstResponder()
+            return true
+        } else {
+            let index = fields.lastIndex(of: textField)!
+            fields[index + 1].becomeFirstResponder()
+            return true
+        }
+    }
 }
