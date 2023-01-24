@@ -28,13 +28,11 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         registerForKeyboardNotifications()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("viewDidDisappear")
         unregisterForKeyboardNotifications()
     }
     
@@ -60,9 +58,6 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
     }
     
     @objc func keyboardWasShown(notification: NSNotification) {
-        
-        print(notification.name)
-        
         if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
            let activeField = activeField
         {
@@ -70,9 +65,6 @@ class KeyboardAwareViewController: UIViewController, TextFieldSupplierProtocol {
             let viewHeight = view.bounds.height
             let keyboardHeight = keyboardRect.height
             let inputMaxY = activeField.frame.maxY
-            
-            print(keyboardRect)
-            print(activeField.frame)
             
             if keyboardRect.maxY >= activeField.frame.maxY {
                 self.view.frame.origin.y = 0 - (inputMaxY - (viewHeight - keyboardHeight))
